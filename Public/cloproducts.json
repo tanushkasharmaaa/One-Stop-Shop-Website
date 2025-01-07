@@ -1,0 +1,59 @@
+[
+    {
+        "name": "Brown Halter Top",
+        "price": "250rs",
+        "image": "product1C.webp",
+        "brand": "By ChicStyle",
+        "productPage": "productpage10.html"
+    },
+    {
+        "name": "Black Tank Top",
+        "price": "300rs",
+        "image": "product3C.webp",
+        "brand": "By HomeGrown",
+        "productPage": "productpage11.html"
+    },
+    {
+        "name": "Brown Tank Top",
+        "price": "350rs",
+        "image": "product2C.webp",
+        "brand": "By HomeClothes",
+        "productPage": "productpage2.html"
+    },
+    {
+        "name": "White Turtleneck Top",
+        "price": "400rs",
+        "image": "product4C.jpg",
+        "brand": "By ChicStyle",
+        "productPage": "productpage12.html"
+    },
+   
+    {
+        "name": "Black Sweetheart Top",
+        "price": "250rs",
+        "image": "clo1.webp",
+        "brand": "By ChicStyle",
+        "productPage": "product1.html"
+    },
+    {
+        "name": "Black Zip Top",
+        "price": "300rs",
+        "image": "clo4.webp",
+        "brand": "By HomeGrown",
+        "productPage": "product1.html"
+    },
+    {
+        "name": "Black Collar Top",
+        "price": "350rs",
+        "image": "clo3.jpg",
+        "brand": "By HomeClothes",
+        "productPage": "product1.html"
+    },
+    {
+        "name": "Black Lace Top",
+        "price": "400rs",
+        "image": "clo2.webp",
+        "brand": "By ChicStyle",
+        "productPage": "product1.html"
+    }
+]

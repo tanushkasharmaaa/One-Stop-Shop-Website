@@ -1,0 +1,58 @@
+[
+    {
+        "name": "Rings Set",
+        "price": "250rs",
+        "image": "rings.webp",
+        "brand": "By CrownJewels",
+        "productPage": "productpage7.html"
+    },
+    {
+        "name": "Layered Necklace",
+        "price": "300rs",
+        "image": "necklaces.jpg",
+        "brand": "By StruckbyLight",
+        "productPage": "productpage8.html"
+    },
+    {
+        "name": "Blue Phone Case",
+        "price": "350rs",
+        "image": "case.webp",
+        "brand": "By Casesforall",
+        "productPage": "productpage9.html"
+    },
+    {
+        "name": "Evil Eye Bracelet Set",
+        "price": "400rs",
+        "image": "bracelet.jpg",
+        "brand": "By CrownJewels",
+        "productPage": "productpage.html"
+    },
+    {
+        "name": "Butterfly earrings",
+        "price": "350rs",
+        "image": "acc1.jpg",
+        "brand": "By CrownJewels",
+        "productPage": "product1.html"
+    },
+    {
+        "name": "Chic Sunglasses",
+        "price": "300rs",
+        "image": "acc2.jpg",
+        "brand": "By StruckbyLight",
+        "productPage": "product1.html"
+    },
+    {
+        "name": "Claw Clip",
+        "price": "150rs",
+        "image": "acc3.jpg",
+        "brand": "By CrownJewels",
+        "productPage": "product1.html"
+    },
+    {
+        "name": "Purple Phone case",
+        "price": "400rs",
+        "image": "acc4.webp",
+        "brand":  "By Casesforall",
+        "productPage": "product1.html"
+    }
+]

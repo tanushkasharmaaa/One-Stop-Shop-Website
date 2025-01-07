@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            background-color: #f4f4f4;
+            background-image: url('wow.jpg');
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.73);
+            padding: 15px 30px;
+        }
+
+        .navbar-links {
+            display: flex;
+        }
+
+        .navbar-link {
+            margin-right: 20px;
+        }
+
+        .navbar-link a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .navbar-link a:hover {
+            color: grey;
+        }
+
+        .nav-icons {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-icons a {
+            color: white;
+            margin-left: 20px;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        .nav-icons a:hover {
+            color: grey;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        .cart-item img {
+            width: 100px;
+            height: auto;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .quantity-input {
+            width: 50px;
+            padding: 5px;
+            text-align: center;
+        }
+
+        .remove-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .remove-btn:hover {
+            background-color: #c82333;
+        }
+
+        .total-container {
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .total-container h3 {
+            font-size: 1.5rem;
+        }
+
+        .checkout-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .checkout-btn:hover {
+            background-color: #218838;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-links">
+            <div class="navbar-link"><a href="home.html">Home</a></div>
+            <div class="navbar-link"><a href="clothing.html">Clothing</a></div>
+            <div class="navbar-link"><a href="accessories.html">Accessories</a></div>
+            <div class="navbar-link"><a href="candles.html">Candles</a></div>
+        </div>
+
+        <div class="nav-icons">
+            <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+            <a href="profile.html"><i class="fas fa-user"></i></a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Shopping Cart</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody id="cart-items">
+
+            </tbody>
+        </table>
+
+        <div class="total-container">
+            <h3 id="cart-total">Total: 0rs</h3>
+            <button id="checkout-btn" class="checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 OneStopShop. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const cartContainer = document.querySelector('#cart-items');
+            const totalContainer = document.querySelector('#cart-total');
+            const checkoutButton = document.querySelector('#checkout-btn');
+
+            const updateCartUI = async () => {
+                try {
+                    const response = await fetch('/api/cart', { method: 'GET' });
+                    const cartItems = await response.json();
+
+                    if (!cartItems.length) {
+                        cartContainer.innerHTML = '<tr><td colspan="6">Your cart is empty.</td></tr>';
+                        totalContainer.textContent = 'Total: 0rs';
+                        return;
+                    }
+
+                    cartContainer.innerHTML = '';
+                    let totalPrice = 0;
+
+                    cartItems.forEach((item) => {
+                        totalPrice += item.total;
+
+                        const cartItemHTML = `
+                            <tr class="cart-item">
+                                <td><img src="${item.image}" alt="${item.productName}" class="cart-item-img"></td>
+                                <td>${item.productName}</td>
+                                <td>
+                                    <input type="number" class="quantity-input" value="${item.quantity}" min="1" data-id="${item._id}">
+                                </td>
+                                <td>${item.price}rs</td>
+                                <td>${item.total}rs</td>
+                                <td><button class="remove-btn" data-id="${item._id}">Remove</button></td>
+                            </tr>
+                        `;
+                        cartContainer.insertAdjacentHTML('beforeend', cartItemHTML);
+                    });
+
+                    totalContainer.textContent = `Total: ${totalPrice}rs`;
+                    localStorage.setItem('totalPrice', totalPrice); 
+
+                    attachEventListeners();
+                } catch (error) {
+                    console.error('Error fetching cart items:', error);
+                    cartContainer.innerHTML = '<tr><td colspan="6">Error loading cart items. Please try again later.</td></tr>';
+                }
+            };
+
+            const attachEventListeners = () => {
+
+                document.querySelectorAll('.quantity-input').forEach((input) => {
+                    input.addEventListener('change', async (e) => {
+                        const itemId = e.target.getAttribute('data-id');
+                        const newQuantity = parseInt(e.target.value, 10);
+
+                        if (newQuantity < 1) {
+                            alert('Quantity cannot be less than 1.');
+                            e.target.value = 1;
+                            return;
+                        }
+
+                        try {
+                            const response = await fetch(`/api/cart/${itemId}`, {
+                                method: 'PATCH',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ quantity: newQuantity }),
+                            });
+
+                            const result = await response.json();
+                            if (response.ok) {
+                                alert(result.message);
+                                updateCartUI();
+                            } else {
+                                throw new Error(result.message);
+                            }
+                        } catch (error) {
+                            console.error('Error updating quantity:', error);
+                            alert('Failed to update quantity. Please try again.');
+                        }
+                    });
+                });
+
+                document.querySelectorAll('.remove-btn').forEach((button) => {
+                    button.addEventListener('click', async (e) => {
+                        const itemId = e.target.getAttribute('data-id');
+
+                        try {
+                            const response = await fetch(`/api/cart/${itemId}`, { method: 'DELETE' });
+                            const result = await response.json();
+                            if (response.ok) {
+                                alert(result.message);
+                                updateCartUI();
+                            } else {
+                                throw new Error(result.message);
+                            }
+                        } catch (error) {
+                            console.error('Error removing item:', error);
+                            alert('Failed to remove item. Please try again.');
+                        }
+                    });
+                });
+            };
+
+            checkoutButton.addEventListener('click', () => {
+                const total = totalContainer.textContent.replace('Total: ', '').replace('rs', '').trim();
+                localStorage.setItem('totalPrice', total);
+                window.location.href = 'payment.html';
+            });
+
+            updateCartUI();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            background-color: #ffffff;
+            color: #333;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: black;
+            padding: 15px 30px;
+        }
+
+        .navbar-links {
+            display: flex;
+        }
+
+        .navbar-link {
+            margin-right: 20px;
+        }
+
+        .navbar-link a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .navbar-link a:hover {
+            color: grey;
+        }
+
+        .nav-icons {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-icons a {
+            color: white;
+            margin-left: 20px;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        .nav-icons a:hover {
+            color: grey;
+        }
+
+        .product-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            display: flex;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-image {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .product-image img {
+            width: 80%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .product-details {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .product-details h1 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .product-details p {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #666;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        .quantity-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .quantity-input {
+            width: 50px;
+            padding: 5px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .add-to-cart-btn {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #218838;
+        }
+
+        .description {
+            margin-top: 30px;
+            line-height: 1.6;
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-links">
+            <div class="navbar-link"><a href="home.html">Home</a></div>
+            <div class="navbar-link"><a href="clothing.html">Clothing</a></div>
+            <div class="navbar-link"><a href="accessories.html">Accessories</a></div>
+            <div class="navbar-link"><a href="candles.html">Candles</a></div>
+        </div>
+
+        <div class="nav-icons">
+            <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+            <a href="profile.html"><i class="fas fa-user"></i></a>
+        </div>
+    </nav>
+
+    <div class="product-container">
+        <div class="product-image">
+            <img src="candles.avif" alt="Double Wick Candle">
+        </div>
+        <div class="product-details">
+            <h1>Double Wick Candle</h1>
+            <p class="price">Price: 300rs</p>
+            <div class="quantity-container">
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="add-to-cart-btn" data-name="Double Wick" data-price="300" data-image="candles.avif">Add to Cart</button>
+            </div>
+            <h3>Description</h3>
+            <p class="description">Our Double Wick Candle offers twice the glow and an even, steady burn. Perfectly crafted to enhance your space, it fills the room with a rich, lasting aroma, creating a warm and inviting ambiance ideal for cozy nights in.</p>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('.add-to-cart-btn').addEventListener('click', function() {
+            const productName = this.getAttribute('data-name');
+            const productPrice = this.getAttribute('data-price');
+            const productImage = this.getAttribute('data-image');
+            const quantity = document.querySelector('.quantity-input').value;
+
+            const product = {
+                name: productName,
+                price: productPrice,
+                image: productImage,
+                quantity: parseInt(quantity) // Convert quantity to a number
+            };
+
+            let cart = localStorage.getItem('cart');
+            cart = cart ? JSON.parse(cart) : [];
+
+            // Check if the product is already in the cart
+            const existingProductIndex = cart.findIndex(item => item.name === productName);
+
+            if (existingProductIndex >= 0) {
+                cart[existingProductIndex].quantity += product.quantity; // Increment quantity
+            } else {
+                cart.push(product);
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            alert(productName + ' has been added to the cart.');
+        });
+    </script>
+</body>
+</html>

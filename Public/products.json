@@ -1,0 +1,58 @@
+[
+    {
+        "name": "Cozy Vanilla",
+        "price": "250rs",
+        "image": "candle.jpg",
+        "brand": "By Jivisa",
+         "productPage": "productpage3.html"
+    },
+    {
+        "name": "Double Wick Candle",
+        "price": "300rs",
+        "image": "candles.avif",
+        "brand": "By SOScandles",
+         "productPage": "productpage4.html"
+    },
+    {
+        "name": "Peach Iced Tea Candle",
+        "price": "350rs",
+        "image": "candles1.jpg",
+        "brand": "By GourmetCandles",
+         "productPage": "productpage5.html"
+    },
+    {
+        "name": "Atlanta Candle",
+        "price": "400rs",
+        "image": "candles2.jpg",
+        "brand": "By CandleNote",
+         "productPage": "productpage6.html"
+    },
+    {
+        "name": "Terre Candle",
+        "price": "250rs",
+        "image": "candle1.png",
+        "brand": "By Les Finite",
+         "productPage": "productpage3.html"
+    },
+    {
+        "name": "Gingerbread Candle",
+        "price": "300rs",
+        "image": "candle3.jpg",
+        "brand": "By Sweet Water Deco",
+         "productPage": "productpage4.html"
+    },
+    {
+        "name": "Pink Grapefruit and Basil",
+        "price": "350rs",
+        "image": "candle2.webp",
+        "brand": "By GourmetCandles",
+         "productPage": "productpage5.html"
+    },
+    {
+        "name": "Cream Soy Candle",
+        "price": "400rs",
+        "image": "candle4.webp",
+        "brand": "By Penta Scents",
+         "productPage": "productpage6.html"
+    }
+]

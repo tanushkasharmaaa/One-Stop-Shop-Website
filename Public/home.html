@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OneStopShop</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        .background-container {
+            position: relative;
+            height: 100%;
+        }
+
+        .background-container::before {
+            content: '';
+            background-image: url('BG.jpg');
+            background-size: cover;
+            background-position: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.6;
+            z-index: -1;
+        }
+
+        .overlay-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: black; 
+        }
+
+        .overlay-content h1 {
+            font-size: 6rem;
+            font-weight: bold;
+            opacity: 0.9;
+        }
+
+        .overlay-content p {
+            font-size: 1.8rem;
+            opacity: 0.9;
+        }
+
+        .search-bar {
+            position: absolute;
+            top: 20px;
+            right: 50px;
+            display: flex;
+            align-items: center;
+            background-color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-bar input {
+            border: none;
+            outline: none;
+            padding: 5px;
+            font-size: 16px;
+            width: 200px;
+        }
+
+        .search-bar button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .search-bar img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .main-content {
+            padding: 230px;
+            background-color: white;
+            color: black;
+            text-align: center;
+        }
+
+        .main-content h2 {
+            font-size: 2.5rem;
+        }
+
+        .main-content p {
+            font-size: 1.2rem;
+            margin: 20px 0;
+        }
+
+        .category-buttons {
+            margin-top: 20px;
+        }
+
+        .category-buttons button {
+            background-color: black; 
+            color: white;
+            padding: 15px 30px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .category-buttons button:hover {
+            background-color: grey;
+        }
+
+        .about-section {
+            background-color: black;
+            padding: 100px;
+            transition: background-color 1s ease-in-out;
+        }
+
+        .about-section h3 {
+            font-size: 2.5rem;
+            text-align: center;
+            color: white; 
+        }
+
+        .about-section p {
+            font-size: 1.5rem;
+            text-align: center;
+            color: white; 
+            margin: 40px;
+        }
+
+        .bestseller-section {
+            padding: 50px 20px;
+            background-color: #f8f8f8;
+            text-align: center;
+        }
+
+        .bestseller-section h4 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .bestseller-carousel {
+            display: flex;
+            justify-content: center;
+            gap: 20px; 
+        }
+
+        .bestseller-carousel img {
+            width: 400px;
+            height: 400px;
+            object-fit: cover; 
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .testimonial-section {
+            padding: 50px 20px;
+            background-color: #333;
+            color: white; 
+            text-align: center;
+        }
+
+        .testimonial-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        .testimonial {
+            background-color: #444;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .testimonial p {
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+
+        .testimonial p:first-child {
+            margin-bottom: 10px;
+        }
+
+        .testimonial p:last-child {
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .featured-products-section {
+            padding: 50px 20px;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .featured-products-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .featured-product {
+            display: inline-block;
+            margin: 20px;
+            text-align: center;
+        }
+
+        .featured-product img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .featured-product h3 {
+            font-size: 1.5rem;
+        }
+
+        .featured-product a {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 1rem;
+            color: black;
+            text-decoration: underline;
+        }
+
+        .connect-section {
+            background-color: #333;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .connect-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .connect-section p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .connect-section .social-icons {
+            margin-bottom: 20px;
+        }
+
+        .connect-section .social-icons a {
+            margin: 0 10px;
+            display: inline-block;
+        }
+
+        .connect-section .social-icons img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .connect-section .social-icons img:hover {
+            transform: scale(1.1);
+        }
+
+        .connect-section a {
+            color: #ddd;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .connect-section a:hover {
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="background-container">
+        <div class="overlay-content">
+            <h1>OneStopShop</h1>
+            <p>Your One-Stop Shop for Small Business Finds!</p>
+        </div>
+
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+            <button><img src="SearchIcon.jpg" alt="Search"></button>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <h2>Shop between these categories:</h2>
+        <div class="category-buttons">
+            <a href="clothing.html"><button>Clothing</button></a>
+            <a href="accessories.html"><button>Accessories</button></a>
+            <a href="candles.html"><button>Candles</button></a>
+        </div>
+    </div>
+
+    <div class="about-section">
+        <h3>About Us:</h3>
+        <p> Our goal is to connect customers with unique small businesses, fostering local communities and supporting passionate entrepreneurs. By shopping with us, you're making a difference and fueling growth.</p>
+    </div>
+
+    
+
+    <div class="bestseller-section">
+        <h4>Our Bestseller:</h4>
+        <div class="bestseller-carousel">
+            <div class="bestseller-images">
+                <img src="rings.webp" alt="Bestseller 1">
+                <img src="candle.jpg" alt="Bestseller 2">
+                <img src="top.avif" alt="Bestseller 3">
+            </div>
+        </div>
+    </div>
+
+    <div class="testimonial-section">
+        <h2>What Our Customers Say</h2>
+        <div class="testimonial">
+            <p>"OneStopShop has the best selection of unique products. I love supporting small businesses!"</p>
+            <p>Shalvi Sisodia</p>
+        </div>
+        <div class="testimonial">
+            <p>"Great quality items and excellent customer service. Highly recommend!"</p>
+            <p>Sonal Rathore</p>
+        </div>
+    </div>
+
+    <div class="featured-products-section">
+        <h2>Just In!!!</h2>
+        <div class="featured-product">
+            <img src="bracelet.jpg" alt="Featured Product 1">
+            <h3>Evil Eye Bracelet Set</h3>
+            <p>By Crownjewles</p>
+            <a href="Productpage.html">Shop Now</a>
+        </div>
+        <div class="featured-product">
+            <img src="product2C.webp" alt="Featured Product 2">
+            <h3>Brown Tank top</h3>
+            <p>By Homeclothes</p>
+            <a href="Productpage2.html">Shop Now</a>
+        </div>
+    </div>
+
+    <div class="connect-section">
+        <h2>Connect with Us</h2>
+        <p>Follow us on social media or contact us directly.</p>
+        
+        <div class="social-icons">
+            <a href="https://www.facebook.com" target="_blank">
+                <img src="facebook-icon.jpg" alt="Facebook">
+            </a>
+            <a href="https://www.twitter.com" target="_blank">
+                <img src="twitter-icon.webp" alt="Twitter">
+            </a>
+            <a href="https://www.instagram.com" target="_blank">
+                <img src="instagram-icon.png" alt="Instagram">
+            </a>
+            <a href="mailto:support@onestopshop.com">
+                <img src="mail-icon.png" alt="Email">
+            </a>
+        </div>
+        
+        <p>Email us: <a href="mailto:support@onestopshop.com">support@onestopshop.com</a></p>
+        <p>Phone: +91-1234567890</p>
+    </div>
+</body>
+
+<script>
+  const colors = ["#3498db", "#e74c3c", "#2ecc71", "#f39c12", "#9b59b6"];
+
+let currentColorIndex = 0;
+
+function changeAboutSectionBackground() {
+    const aboutSection = document.querySelector('.about-section');
+    aboutSection.style.backgroundColor = colors[currentColorIndex];
+
+    currentColorIndex = (currentColorIndex + 1) % colors.length;
+}
+
+setInterval(changeAboutSectionBackground, 2000);
+
+</script>
+
+
+
+
+</html>
